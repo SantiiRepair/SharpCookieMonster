@@ -164,7 +164,7 @@ namespace SharpCookieMonster
 
             browserProcess.StartInfo.UseShellExecute = false;
             browserProcess.StartInfo.FileName = path;
-            browserProcess.StartInfo.Arguments = $"\"{url}\" --headless --user-data-dir=\"{userdata}\" --remote-debugging-port={port} --remote-allow-origins=ws://localhost:{port}";
+            browserProcess.StartInfo.Arguments = $"\"{url}\" --headless=new --user-data-dir=\"{userdata}\" --remote-debugging-port={port} --remote-allow-origins=ws://localhost:{port}";
             browserProcess.StartInfo.CreateNoWindow = true;
             browserProcess.OutputDataReceived += LogData;
             browserProcess.ErrorDataReceived += LogData;
@@ -204,7 +204,7 @@ namespace SharpCookieMonster
                 }
 
                 var debugUrl = match.Groups[1].Value;
-                const string cookiesRequest = "{\"id\": 1, \"method\": \"Network.getAllCookies\"}";
+                const string cookiesRequest = "{\"id\": 1, \"method\": \"Storage.getCookies\"}";
                 Console.WriteLine("[*] Retrieved debug url: " + debugUrl);
                 return WebSocketRequest35(debugUrl, cookiesRequest);
             }
